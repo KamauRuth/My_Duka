@@ -1,0 +1,89 @@
+/* Import Bootstrap */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+/* General styles */
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #fff;
+}
+
+/* Header */
+header {
+  background: #59788e;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+/* Search bar */
+.search-container {
+  position: relative;
+}
+
+.search-container input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px 30px;
+  width: 250px;
+}
+
+.search-container svg {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+
+/* Category buttons */
+.category-button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.category-button:hover {
+  background: #e2e6ea;
+}
+
+/* Product card */
+.product-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.product-card img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.product-card h3 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.product-card p {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.product-card button {
+  background: #007bff;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.product-card button:hover {
+  background: #0056b3;
+}
