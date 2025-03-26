@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #F5F5F5;
+    background-color: #F2F0EF;
   }
   
   header {
@@ -117,8 +117,76 @@ body {
   }
   
   .signup button:hover {
-    background: #218838;
+    background: blue;
   }
+
+  .home {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .home h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .home p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .categories {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .category-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    width: 250px;
+    text-align: center;
+  }
+  
+  .category-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .category-card h3 {
+    color: #007bff;
+  }
+  
+  .contact {
+    margin-top: 30px;
+    font-size: 16px;
+  }
+
+  /* Footer Styling */
+.footer {
+    background: gray;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+  }
+  
+  .footer h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .footer p {
+    color: white;
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
   
   
   
