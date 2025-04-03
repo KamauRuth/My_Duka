@@ -10,8 +10,10 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+   
     try {
-      await axios.post("/api/user/signup", user);
+      console.log("hello");
+      await axios.post("api/user/signup", user);
       alert("Signup Successful");
     } catch (error) {
       alert("Signup Failed");
