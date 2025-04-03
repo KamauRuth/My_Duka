@@ -140,7 +140,7 @@ body {
   .categories {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 50px;
     flex-wrap: wrap;
   }
   
@@ -186,7 +186,29 @@ body {
     font-size: 16px;
     margin: 5px 0;
   }
-  
+
+  /* Styling for Slick Carousel */
+.slick-slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.category-card {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.slick-prev,
+.slick-next {
+  color: #333;
+  font-size: 20px;
+  z-index: 10;
+}
+
   
   
   
