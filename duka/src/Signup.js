@@ -1,36 +1,96 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
-  const [user, setUser] = useState({ name: "", email: "", password: "" });
+function SignUp() {
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
 
   const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const onFinish = async (e) => {
     e.preventDefault();
-   
     try {
-      console.log("hello");
-      await axios.post("api/user/signup", user);
-      alert("Signup Successful");
+      const response = await axios.post("http://localhost:5000/api/user/signup", form);
+      const data = response.data;
+
+      if (data.success) {
+        toast.success(data.message);
+        setTimeout(() => navigate('/login'), 2000);
+      } else {
+        toast.error(data.message || "Signup failed");
+      }
     } catch (error) {
-      alert("Signup Failed");
+      toast.error(error.response?.data?.message || "Something went wrong!");
+      console.error(error);
     }
   };
 
   return (
     <div className="signup">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <input type="text" name="name" placeholder="Name" onChange={handleChange} required />
-        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-        <button type="submit">Sign Up</button>
-      </form>
+      <Toaster />
+      <div className="signup_form">
+        <form className="myform" onSubmit={onFinish}>
+          <h1>Sign Up</h1>
+
+          <div className="input-box">
+            <label htmlFor="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              onChange={handleChange}
+              value={form.username}
+              required
+              placeholder="Enter your username"
+            />
+          </div>
+
+          <div className="input-box">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              onChange={handleChange}
+              value={form.email}
+              required
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div className="input-box">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              onChange={handleChange}
+              value={form.password}
+              required
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <button type="submit" className="btn">Register</button>
+
+          <div className="register-link">
+            <p>Already have an account? <a href="/login">Login</a></p>
+            <p><a href="/forgot-password">Forgot Password?</a></p>
+          </div>
+        </form>
+      </div>
     </div>
   );
-};
+}
 
-export default Signup;
+export default SignUp;

@@ -10,14 +10,27 @@ const bcrypt = require("bcryptjs");
 const User = require("../Models/userModel.js");
 
 userRouter.post("/signup", async (req, res) => {
+  
   try {
-    const { name, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ name, email, password: hashedPassword });
+    const userExists = await User.findOne({ email: req.body.email });
+    if (userExists) {
+      return res
+        .status(400)
+        .send({ message: "User already exists", success: false });
+    }
+    const password = req.body.password;
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    req.body.password = hashedPassword;
+
+    const newUser = new User(req.body);
     await newUser.save();
-    res.status(201).json({ message: "User registered successfully" });
+    res
+      .status(200)
+      .send({ message: "User created successfully", success: true });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.warn(error);
+    res.status(500).send({ message: "Error creating user", success: false });
   }
 });
 
