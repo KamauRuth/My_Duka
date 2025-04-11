@@ -1,35 +1,40 @@
 const express = require('express');
-const cors = require('cors')
-const bodyParser = require('body-parser')
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 require('dotenv').config();
 
+// Database configuration
 const dbConfig = require("./config/dbconfig.js");
 
+// Routers
 const userRouter = require('./Routes/user.js');
+const adminRouter = require('./Routes/admin.js');
 
-const cors_options = {
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  };
+const app = express();  // Initialize the app
 
+// CORS middleware setup
+const corsOptions = {
+  origin: "http://localhost:3000",  // Allow requests from frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
-const app = express();
+app.use(cors(corsOptions));  // Use CORS with custom options
 
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(cors());
-app.use(cors(cors_options));
-app.use('/api/user', userRouter);
+// Middleware setup
+app.use(express.json());  // To parse JSON bodies
+app.use(bodyParser.json());  // Optional, you can remove if not necessary
 
-const port = process.env.PORT || 5000;
+// Serve uploaded images statically
+app.use("/uploads", express.static("uploads"));
 
+// Routes
+app.use('/api/user', userRouter);  // User routes
+app.use('/api/admin', adminRouter);  // Admin routes
 
-// app.use("/api/auth", authRoutes);
-// app.use("/api/products", productRoutes);
-// app.use("/api/orders", orderRoutes);
-
-app.use("api/user", userRouter)
-
+// Server startup
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

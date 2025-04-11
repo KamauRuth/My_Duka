@@ -289,3 +289,56 @@ body {
   font-size: small;
 }
   
+.add-product-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add-product-container h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.add-product-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-product-container input,
+.add-product-container textarea {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.add-product-container input:focus,
+.add-product-container textarea:focus {
+  border-color: #1f8ef1;
+}
+
+.add-product-container button {
+  background-color: #1f8ef1;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.add-product-container button:hover {
+  background-color: #166fd2;
+}
