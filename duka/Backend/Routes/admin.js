@@ -51,7 +51,7 @@ adminRouter.post("/add-product", upload.single("image"), async (req, res) => {
     });
 
     await newProduct.save();
-
+    
     res.status(201).json({ success: true, message: "Product added successfully!" });
   } catch (err) {
     console.error(err);
@@ -69,6 +69,19 @@ adminRouter.get("/products", async (req, res) => {
   }
 });
 
+adminRouter.get("/product/:id", async (req, res) => {
+
+  const productId = req.params.id; // Extract product ID from request parameters
+  console.log(productId);
+  try {
+    const product = await Product.findById(req.params.id); // Fetch product by ID
+    if (!product) return res.status(404).json({ message: "Product not found" });
+    res.json(product); // Return the product as JSON
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error, failed to fetch product" });
+  }
+});
 
 
 
