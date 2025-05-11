@@ -11,6 +11,7 @@ const Admin = require("../Models/adminModel.js");
 
 const fs = require('fs');
 
+const { v4: uuidv4 } = require('uuid');
 
 const uploadPath = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadPath)) {
@@ -40,7 +41,10 @@ adminRouter.post("/add-product", upload.single("image"), async (req, res) => {
     const { name, sku, brand, category, price, description } = req.body;
     const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
+    const productId = uuidv4();  // Generate a unique product ID
+
     const newProduct = new Product({
+      productId, 
       name,
       sku,
       brand,
@@ -51,7 +55,8 @@ adminRouter.post("/add-product", upload.single("image"), async (req, res) => {
     });
 
     await newProduct.save();
-    
+    console.log(productId);
+
     res.status(201).json({ success: true, message: "Product added successfully!" });
   } catch (err) {
     console.error(err);
@@ -59,29 +64,8 @@ adminRouter.post("/add-product", upload.single("image"), async (req, res) => {
   }
 });
 
-adminRouter.get("/products", async (req, res) => {
-  try {
-    const products = await Product.find(); // Fetch all products
-    res.status(200).json(products);        // Return them as a JSON array
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error, failed to fetch products" });
-  }
-});
 
-adminRouter.get("/product/:id", async (req, res) => {
 
-  const productId = req.params.id; // Extract product ID from request parameters
-  console.log(productId);
-  try {
-    const product = await Product.findById(req.params.id); // Fetch product by ID
-    if (!product) return res.status(404).json({ message: "Product not found" });
-    res.json(product); // Return the product as JSON
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error, failed to fetch product" });
-  }
-});
 
 
 

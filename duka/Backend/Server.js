@@ -12,8 +12,9 @@ const dbConfig = require("./config/dbconfig.js");
 // Routers
 const userRouter = require('./Routes/user.js');
 const adminRouter = require('./Routes/admin.js');
+const productRouter = require("./Routes/product.js")
 
-const app = express();  // Initialize the app
+const app = express();
 
 // CORS middleware setup
 const corsOptions = {
@@ -35,6 +36,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'Routes/uploads')));
 // Routes
 app.use('/api/user', userRouter);  // User routes
 app.use('/api/admin', adminRouter);  // Admin routes
+app.use('/api/product', productRouter) // Product routes
 
 // Server startup
 const PORT = process.env.PORT || 5000;

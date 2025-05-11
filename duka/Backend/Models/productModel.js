@@ -7,8 +7,12 @@ const categoryEnum = [
   "Home Appliances",
 ];
 
-const productSchema = new mongoose.Schema(
-  {
+const productSchema = new mongoose.Schema({
+    productId: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     name: {
       type: String,
       required: true,

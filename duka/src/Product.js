@@ -7,7 +7,7 @@ function ProductPage() {
 
   useEffect(() => {
     // Fetch all products
-    axios.get("http://localhost:5000/api/admin/products")
+    axios.get("http://localhost:5000/api/product/products")
       .then((res) => setProducts(res.data))
       .catch((err) => console.error(err));
   }, []);
