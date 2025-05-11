@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const adminRouter = express.Router();
 const bcrypt = require("bcryptjs");
@@ -57,5 +58,18 @@ adminRouter.post("/add-product", upload.single("image"), async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to add product" });
   }
 });
+
+adminRouter.get("/products", async (req, res) => {
+  try {
+    const products = await Product.find(); // Fetch all products
+    res.status(200).json(products);        // Return them as a JSON array
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error, failed to fetch products" });
+  }
+});
+
+
+
 
 module.exports = adminRouter;

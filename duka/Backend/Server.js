@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require("path");
+
 
 require('dotenv').config();
 
@@ -27,7 +29,8 @@ app.use(express.json());  // To parse JSON bodies
 app.use(bodyParser.json());  // Optional, you can remove if not necessary
 
 // Serve uploaded images statically
-app.use("/uploads", express.static("uploads"));
+app.use('/uploads', express.static(path.join(__dirname, 'Routes/uploads')));
+
 
 // Routes
 app.use('/api/user', userRouter);  // User routes
